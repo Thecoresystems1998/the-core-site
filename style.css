@@ -26,13 +26,31 @@ body{
   text-align:center;
 
   padding:60px 30px;
+  position:relative;
 }
 
-/* HERO */
+/* =====================
+   WORDMARK LOGO
+===================== */
 
-.core-logo-img{
-  width:min(1000px,95vw);
+.core-wordmark{
+  display:flex;
+  align-items:baseline;
+  gap:26px;
+  letter-spacing:.18em;
 }
+
+.core-wordmark .the{
+  font-size:28px;
+  opacity:.85;
+}
+
+.core-wordmark .core{
+  font-size:96px;
+  letter-spacing:.12em;
+}
+
+/* HERO TAG */
 
 .hero-tagline{
   position:absolute;
@@ -72,6 +90,7 @@ body{
   color:#eee;
   letter-spacing:.4em;
   cursor:pointer;
+  transition:.2s;
 }
 
 .btn:hover{
@@ -85,6 +104,7 @@ body{
   border:1px solid #1a1a1a;
   padding:80px;
   margin-top:50px;
+  background:#050505;
 }
 
 .lock-bar{
@@ -117,6 +137,7 @@ body{
 .member-tile{
   border:1px solid #1f1f1f;
   padding:70px;
+  background:#050505;
 }
 
 /* ======================

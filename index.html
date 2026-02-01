@@ -11,11 +11,14 @@
 
 <div class="slider">
 
-<!-- SLIDE 1 — HERO -->
+<!-- SLIDE 1 — HERO WORDMARK -->
 
 <section class="slide logo-slide">
 
-  <img src="images/logo.jpg" class="core-logo-img">
+  <div class="core-wordmark">
+    <span class="the">THE</span>
+    <span class="core">CORE.</span>
+  </div>
 
   <div class="hero-tagline">
     DISCIPLINE • DANGER • FOCUS
@@ -51,7 +54,7 @@
 
 </section>
 
-<!-- SLIDE 4 — MEMBER -->
+<!-- SLIDE 4 — MEMBER PREVIEW -->
 
 <section class="slide">
 
@@ -105,7 +108,9 @@
 
 <script>
 
-/* PANEL */
+/* =====================
+   PANEL CONTROL
+===================== */
 
 function openReservePanel(){
   document.getElementById("reservePanel").classList.add("active");
@@ -115,7 +120,9 @@ function closeReservePanel(){
   document.getElementById("reservePanel").classList.remove("active");
 }
 
-/* RESERVE CALL — PORT 4000 */
+/* =====================
+   RESERVE CALL — PORT 4000
+===================== */
 
 async function submitReserve(){
 
