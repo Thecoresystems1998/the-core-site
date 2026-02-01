@@ -9,70 +9,53 @@
 
 <body>
 
-<div class="slider">
+<!-- SYSTEM HEADER -->
 
-<!-- SLIDE 1 — HERO LOGO -->
+<div class="system-bar">
+  <div class="sys-left">SEARCH</div>
+  <div class="sys-center">
+    <img src="images/logo-horizontal.png" class="sys-logo">
+  </div>
+  <div class="sys-right" onclick="openReservePanel()">ACCESS</div>
+</div>
 
-<section class="slide logo-slide">
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="grain"></div>
 
   <img src="images/logo-horizontal.png" class="hero-logo">
 
-  <div class="hero-tagline">
+  <div class="hero-sub">
     DISCIPLINE • DANGER • FOCUS
   </div>
 
 </section>
 
-<!-- SLIDE 2 — PRODUCT -->
+<!-- CINEMATIC SECTION -->
 
-<section class="slide">
+<section class="cinematic">
 
-  <img src="images/hero.jpg" class="object-hero">
+  <div class="cinematic-inner">
 
-  <button class="btn" onclick="openReservePanel()">
-    RESERVE ENTRY
-  </button>
+    <img src="images/hero.jpg" class="cinematic-img">
 
-</section>
-
-<!-- SLIDE 3 — ARCHIVE -->
-
-<section class="slide">
-
-  <div class="title">ARCHIVE ACTIVATION</div>
-
-  <div class="card">
-    <div class="sub">
-      NFC verification required<br>
-      Registered object required
+    <div class="cinematic-copy">
+      REGISTERED OBJECT  
+      LIMITED ENTRY  
+      SYSTEM ACCESS
     </div>
-    <div class="lock-bar"></div>
+
+    <button class="reserve-btn" onclick="openReservePanel()">
+      RESERVE ENTRY
+    </button>
+
   </div>
 
 </section>
 
-<!-- SLIDE 4 — MEMBER PREVIEW -->
-
-<section class="slide">
-
-  <div class="title">MEMBER SPACE — PREVIEW</div>
-
-  <div class="member-grid">
-    <div class="member-tile">ENTRY</div>
-    <div class="member-tile">ARCHIVE</div>
-    <div class="member-tile">STATUS</div>
-    <div class="member-tile">ACCESS</div>
-    <div class="member-tile">RECORD</div>
-    <div class="member-tile">CORE</div>
-  </div>
-
-</section>
-
-</div>
-
-<!-- =====================
-     RESERVE PANEL
-===================== -->
+<!-- RESERVE PANEL -->
 
 <div class="reserve-overlay" id="reservePanel">
 
@@ -82,28 +65,21 @@
       SYSTEM RESERVATION
     </div>
 
-    <input
-      type="email"
-      id="reserveEmail"
-      placeholder="email"
-      class="reserve-input"
-    >
+    <input id="reserveEmail" class="reserve-input" placeholder="email">
 
-    <button class="btn" onclick="submitReserve()">
+    <button class="reserve-confirm" onclick="submitReserve()">
       CONFIRM
     </button>
 
-    <div class="reserve-status" id="reserveStatus"></div>
+    <div id="reserveStatus" class="reserve-status"></div>
 
-    <button class="reserve-close" onclick="closeReservePanel()">×</button>
+    <div class="reserve-close" onclick="closeReservePanel()">×</div>
 
   </div>
 
 </div>
 
 <script>
-
-/* PANEL */
 
 function openReservePanel(){
   document.getElementById("reservePanel").classList.add("active");
@@ -113,17 +89,10 @@ function closeReservePanel(){
   document.getElementById("reservePanel").classList.remove("active");
 }
 
-/* RESERVE CALL — backend */
-
 async function submitReserve(){
 
   const email = document.getElementById("reserveEmail").value;
   const status = document.getElementById("reserveStatus");
-
-  if(!email){
-    status.innerText = "EMAIL REQUIRED";
-    return;
-  }
 
   status.innerText = "PROCESSING";
 
@@ -139,14 +108,7 @@ async function submitReserve(){
 
     if(data.status === "reserved"){
       status.innerText = "RESERVED — POSITION " + data.position;
-    }
-    else if(data.status === "full"){
-      status.innerText = "EDITION FULL";
-    }
-    else if(data.error){
-      status.innerText = data.error.toUpperCase();
-    }
-    else{
+    } else {
       status.innerText = "FAILED";
     }
 

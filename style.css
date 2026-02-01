@@ -3,127 +3,129 @@
 body{
   font-family:Inter,Arial,sans-serif;
   background:#000;
-  color:#f2f2f2;
-  overflow:hidden;
+  color:#eaeaea;
 }
 
-/* SLIDER */
+/* SYSTEM BAR */
 
-.slider{
-  height:100vh;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
+.system-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:70px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 40px;
+
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(14px);
+
+  border-bottom:1px solid rgba(255,255,255,.06);
+
+  z-index:10;
 }
 
-.slide{
-  height:100vh;
-  scroll-snap-align:start;
+.sys-left,
+.sys-right{
+  letter-spacing:.4em;
+  font-size:12px;
+  opacity:.7;
+  cursor:pointer;
+}
 
+.sys-logo{
+  height:28px;
+  opacity:.9;
+}
+
+/* HERO */
+
+.hero{
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-
-  padding:60px 30px;
   position:relative;
+  overflow:hidden;
 }
-
-/* HERO LOGO */
 
 .hero-logo{
-  width:min(1000px,92vw);
-  object-fit:contain;
+  width:min(900px,88vw);
+  opacity:0;
+  transform:translateY(30px);
+  animation:logoIn 1.4s ease forwards .4s;
 }
 
-/* TAGLINE */
+@keyframes logoIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-.hero-tagline{
+.hero-sub{
   position:absolute;
-  bottom:50px;
-  font-size:13px;
+  bottom:60px;
   letter-spacing:.55em;
-  opacity:.5;
+  font-size:13px;
+  opacity:.45;
 }
 
-/* OBJECT */
+/* GRAIN */
 
-.object-hero{
-  width:min(1300px,96vw);
-}
-
-/* TYPE */
-
-.title{
-  font-size:40px;
-  letter-spacing:.32em;
-}
-
-.sub{
-  margin-top:30px;
-  opacity:.6;
-  letter-spacing:.25em;
-  line-height:2;
-}
-
-/* BUTTON */
-
-.btn{
-  margin-top:50px;
-  padding:22px 52px;
-  background:#0a0a0a;
-  border:1px solid #2a2a2a;
-  color:#eee;
-  letter-spacing:.4em;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn:hover{
-  background:#151515;
-  border-color:#555;
-}
-
-/* CARD */
-
-.card{
-  border:1px solid #1a1a1a;
-  padding:80px;
-  margin-top:50px;
-  background:#050505;
-}
-
-.lock-bar{
-  width:300px;
-  height:6px;
-  background:#111;
-  margin-top:40px;
-  position:relative;
-}
-
-.lock-bar::after{
-  content:"";
-  width:30%;
-  height:100%;
-  background:#444;
+.grain{
   position:absolute;
+  inset:0;
+  opacity:.06;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  pointer-events:none;
 }
 
-/* MEMBER */
+/* CINEMATIC */
 
-.member-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:30px;
+.cinematic{
+  min-height:120vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:140px 40px;
+}
+
+.cinematic-inner{
+  width:min(1200px,94vw);
+  text-align:center;
+}
+
+.cinematic-img{
+  width:100%;
+  filter:contrast(1.15) brightness(.9);
+}
+
+.cinematic-copy{
   margin-top:60px;
-  opacity:.4;
-  filter:blur(3px);
+  letter-spacing:.45em;
+  line-height:2.2;
+  opacity:.7;
 }
 
-.member-tile{
-  border:1px solid #1f1f1f;
-  padding:70px;
-  background:#050505;
+.reserve-btn{
+  margin-top:50px;
+  padding:22px 60px;
+  background:transparent;
+  border:1px solid #333;
+  color:#eee;
+  letter-spacing:.45em;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.reserve-btn:hover{
+  border-color:#888;
 }
 
 /* RESERVE PANEL */
@@ -131,15 +133,13 @@ body{
 .reserve-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.94);
-
+  background:rgba(0,0,0,.96);
   display:flex;
   justify-content:center;
   align-items:center;
-
   opacity:0;
   pointer-events:none;
-  transition:.35s;
+  transition:.3s;
 }
 
 .reserve-overlay.active{
@@ -148,9 +148,9 @@ body{
 }
 
 .reserve-box{
-  border:1px solid #2a2a2a;
+  border:1px solid #222;
   background:#070707;
-  padding:90px;
+  padding:80px;
   width:420px;
   text-align:center;
   position:relative;
@@ -165,25 +165,31 @@ body{
   width:100%;
   padding:18px;
   background:#000;
-  border:1px solid #2a2a2a;
+  border:1px solid #333;
   color:#fff;
   margin-bottom:30px;
-  letter-spacing:.2em;
+}
+
+.reserve-confirm{
+  padding:18px 40px;
+  border:1px solid #444;
+  background:#000;
+  color:#fff;
+  letter-spacing:.35em;
+  cursor:pointer;
 }
 
 .reserve-status{
-  margin-top:30px;
-  letter-spacing:.3em;
+  margin-top:26px;
   opacity:.7;
+  letter-spacing:.25em;
 }
 
 .reserve-close{
   position:absolute;
-  top:12px;
+  top:10px;
   right:18px;
-  background:none;
-  border:none;
-  color:#666;
-  font-size:24px;
+  font-size:22px;
+  opacity:.5;
   cursor:pointer;
 }
