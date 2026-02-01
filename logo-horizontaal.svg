@@ -1,0 +1,27 @@
+<svg width="2200" height="420" viewBox="0 0 2200 420" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .the {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 500;
+      font-size: 96px;
+      letter-spacing: 0.55em;
+      fill: #EDEDED;
+    }
+
+    .core {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      font-size: 240px;
+      letter-spacing: 0.08em;
+      fill: #EDEDED;
+    }
+  </style>
+
+  <!-- THE -->
+  <text x="0" y="140" class="the">THE</text>
+
+  <!-- CORE -->
+  <text x="420" y="300" class="core">CORE.</text>
+
+</svg>

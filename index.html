@@ -11,14 +11,11 @@
 
 <div class="slider">
 
-<!-- SLIDE 1 — HERO WORDMARK -->
+<!-- SLIDE 1 — HERO LOGO -->
 
 <section class="slide logo-slide">
 
-  <div class="core-wordmark">
-    <span class="the">THE</span>
-    <span class="core">CORE.</span>
-  </div>
+  <img src="images/logo-horizontal.png" class="hero-logo">
 
   <div class="hero-tagline">
     DISCIPLINE • DANGER • FOCUS
@@ -26,7 +23,7 @@
 
 </section>
 
-<!-- SLIDE 2 — OBJECT -->
+<!-- SLIDE 2 — PRODUCT -->
 
 <section class="slide">
 
@@ -98,9 +95,7 @@
 
     <div class="reserve-status" id="reserveStatus"></div>
 
-    <button class="reserve-close" onclick="closeReservePanel()">
-      ×
-    </button>
+    <button class="reserve-close" onclick="closeReservePanel()">×</button>
 
   </div>
 
@@ -108,9 +103,7 @@
 
 <script>
 
-/* =====================
-   PANEL CONTROL
-===================== */
+/* PANEL */
 
 function openReservePanel(){
   document.getElementById("reservePanel").classList.add("active");
@@ -120,9 +113,7 @@ function closeReservePanel(){
   document.getElementById("reservePanel").classList.remove("active");
 }
 
-/* =====================
-   RESERVE CALL — PORT 4000
-===================== */
+/* RESERVE CALL — backend */
 
 async function submitReserve(){
 
@@ -155,7 +146,7 @@ async function submitReserve(){
     else if(data.error){
       status.innerText = data.error.toUpperCase();
     }
-    else {
+    else{
       status.innerText = "FAILED";
     }
 

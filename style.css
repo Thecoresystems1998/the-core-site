@@ -29,28 +29,14 @@ body{
   position:relative;
 }
 
-/* =====================
-   WORDMARK LOGO
-===================== */
+/* HERO LOGO */
 
-.core-wordmark{
-  display:flex;
-  align-items:baseline;
-  gap:26px;
-  letter-spacing:.18em;
+.hero-logo{
+  width:min(1000px,92vw);
+  object-fit:contain;
 }
 
-.core-wordmark .the{
-  font-size:28px;
-  opacity:.85;
-}
-
-.core-wordmark .core{
-  font-size:96px;
-  letter-spacing:.12em;
-}
-
-/* HERO TAG */
+/* TAGLINE */
 
 .hero-tagline{
   position:absolute;
@@ -140,9 +126,7 @@ body{
   background:#050505;
 }
 
-/* ======================
-   RESERVE PANEL
-====================== */
+/* RESERVE PANEL */
 
 .reserve-overlay{
   position:fixed;
