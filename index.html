@@ -9,45 +9,34 @@
 
 <body>
 
-<!-- SYSTEM HEADER -->
+<!-- =====================
+TOP SYSTEM BAR
+===================== -->
 
-<div class="system-bar">
-  <div class="sys-left">SEARCH</div>
-  <div class="sys-center">
-    <img src="images/logo-horizontal.png" class="sys-logo">
+<div class="top-bar">
+
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input class="search-input" placeholder="search archive">
   </div>
-  <div class="sys-right" onclick="openReservePanel()">ACCESS</div>
+
+  <img src="images/logo-horizontal.png" class="top-logo">
+
+  <div class="top-right" onclick="openReservePanel()">ACCESS</div>
+
 </div>
 
-<!-- HERO -->
+<!-- =====================
+CINEMATIC HERO CANVAS
+===================== -->
 
-<section class="hero">
+<section class="hero-canvas">
 
-  <div class="grain"></div>
+  <img src="images/landing-hero.png" class="hero-bg">
 
-  <img src="images/logo-horizontal.png" class="hero-logo">
+  <div class="hero-overlay">
 
-  <div class="hero-sub">
-    DISCIPLINE • DANGER • FOCUS
-  </div>
-
-</section>
-
-<!-- CINEMATIC SECTION -->
-
-<section class="cinematic">
-
-  <div class="cinematic-inner">
-
-    <img src="images/hero.jpg" class="cinematic-img">
-
-    <div class="cinematic-copy">
-      REGISTERED OBJECT  
-      LIMITED ENTRY  
-      SYSTEM ACCESS
-    </div>
-
-    <button class="reserve-btn" onclick="openReservePanel()">
+    <button class="hero-cta" onclick="openReservePanel()">
       RESERVE ENTRY
     </button>
 
@@ -55,7 +44,72 @@
 
 </section>
 
-<!-- RESERVE PANEL -->
+<!-- =====================
+PRODUCT
+===================== -->
+
+<section class="product">
+
+  <img src="images/hero.jpg" class="product-img">
+
+  <button class="preorder-btn">
+    PRE-ORDER TOWEL
+  </button>
+
+</section>
+
+<!-- =====================
+STATUS BLOCK
+===================== -->
+
+<section class="status">
+
+  <div class="status-box">
+
+    <div class="status-title">
+      OBJECT STATUS
+    </div>
+
+    <div class="status-line">NFC — UNACTIVATED</div>
+    <div class="status-line">ARCHIVE — LOCKED</div>
+    <div class="status-line">MEMBER — REQUIRED</div>
+
+  </div>
+
+</section>
+
+<!-- =====================
+MEMBER PREVIEW
+===================== -->
+
+<section class="members">
+
+  <div class="members-title">
+    MEMBERSPACE PREVIEW
+  </div>
+
+  <div class="member-grid">
+    <div class="tile">ARCHIVE</div>
+    <div class="tile">OBJECT</div>
+    <div class="tile">STATUS</div>
+    <div class="tile">ACCESS</div>
+    <div class="tile">REGISTRY</div>
+    <div class="tile">CORE</div>
+  </div>
+
+</section>
+
+<!-- =====================
+BOTTOM BAR
+===================== -->
+
+<div class="bottom-bar" id="bottomBar">
+DISCIPLINE • DANGER • FOCUS
+</div>
+
+<!-- =====================
+RESERVE PANEL
+===================== -->
 
 <div class="reserve-overlay" id="reservePanel">
 
@@ -67,7 +121,7 @@
 
     <input id="reserveEmail" class="reserve-input" placeholder="email">
 
-    <button class="reserve-confirm" onclick="submitReserve()">
+    <button onclick="submitReserve()" class="reserve-confirm">
       CONFIRM
     </button>
 
@@ -79,26 +133,35 @@
 
 </div>
 
+<!-- =====================
+SCRIPT
+===================== -->
+
 <script>
 
+const topBar = document.querySelector(".top-bar");
+const bottomBar = document.getElementById("bottomBar");
+
+/* reserve panel */
+
 function openReservePanel(){
-  document.getElementById("reservePanel").classList.add("active");
+  reservePanel.classList.add("active");
 }
 
 function closeReservePanel(){
-  document.getElementById("reservePanel").classList.remove("active");
+  reservePanel.classList.remove("active");
 }
+
+/* reserve api */
 
 async function submitReserve(){
 
-  const email = document.getElementById("reserveEmail").value;
-  const status = document.getElementById("reserveStatus");
-
-  status.innerText = "PROCESSING";
+  const email = reserveEmail.value;
+  reserveStatus.innerText = "PROCESSING";
 
   try {
 
-    const r = await fetch("http://localhost:4000/reserve", {
+    const r = await fetch("http://localhost:4000/reserve",{
       method:"POST",
       headers:{ "Content-Type":"application/json"},
       body: JSON.stringify({ email })
@@ -106,17 +169,50 @@ async function submitReserve(){
 
     const data = await r.json();
 
-    if(data.status === "reserved"){
-      status.innerText = "RESERVED — POSITION " + data.position;
+    if(data.status==="reserved"){
+      reserveStatus.innerText =
+        "RESERVED — POSITION " + data.position;
     } else {
-      status.innerText = "FAILED";
+      reserveStatus.innerText = "FAILED";
     }
 
-  } catch(e){
-    status.innerText = "SERVER ERROR";
+  } catch {
+    reserveStatus.innerText = "SERVER ERROR";
+  }
+}
+
+/* cinematic bar behavior */
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+
+  const y = window.scrollY;
+
+  if(y > 80 && y > lastScroll){
+    topBar.classList.add("bar-hidden");
+    bottomBar.classList.add("bottom-hidden");
+  } else {
+    topBar.classList.remove("bar-hidden");
+    bottomBar.classList.remove("bottom-hidden");
   }
 
-}
+  lastScroll = y;
+});
+
+/* cursor reveal */
+
+document.addEventListener("mousemove", (e) => {
+
+  if(e.clientY < 80){
+    topBar.classList.remove("bar-hidden");
+  }
+
+  if(window.innerHeight - e.clientY < 80){
+    bottomBar.classList.remove("bottom-hidden");
+  }
+
+});
 
 </script>
 
