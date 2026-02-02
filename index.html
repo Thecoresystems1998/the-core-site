@@ -9,9 +9,7 @@
 
 <body>
 
-<!-- =====================
-TOP SYSTEM BAR
-===================== -->
+<!-- ================= TOP BAR ================= -->
 
 <div class="top-bar">
 
@@ -26,29 +24,23 @@ TOP SYSTEM BAR
 
 </div>
 
-<!-- =====================
-CINEMATIC HERO CANVAS
-===================== -->
+<!-- ================= HERO CANVAS ================= -->
 
-<section class="hero-canvas">
+<section class="hero-canvas" id="heroCanvas">
 
-  <img src="images/landing-hero.png" class="hero-bg">
+  <img src="images/landing-hero.png" class="hero-bg" id="heroBg">
 
   <div class="hero-overlay">
-
     <button class="hero-cta" onclick="openReservePanel()">
       RESERVE ENTRY
     </button>
-
   </div>
 
 </section>
 
-<!-- =====================
-PRODUCT
-===================== -->
+<!-- ================= PRODUCT ================= -->
 
-<section class="product">
+<section class="product" id="productSection">
 
   <img src="images/hero.jpg" class="product-img">
 
@@ -58,9 +50,7 @@ PRODUCT
 
 </section>
 
-<!-- =====================
-STATUS BLOCK
-===================== -->
+<!-- ================= STATUS ================= -->
 
 <section class="status">
 
@@ -78,9 +68,7 @@ STATUS BLOCK
 
 </section>
 
-<!-- =====================
-MEMBER PREVIEW
-===================== -->
+<!-- ================= MEMBERS ================= -->
 
 <section class="members">
 
@@ -99,17 +87,13 @@ MEMBER PREVIEW
 
 </section>
 
-<!-- =====================
-BOTTOM BAR
-===================== -->
+<!-- ================= BOTTOM BAR ================= -->
 
 <div class="bottom-bar" id="bottomBar">
 DISCIPLINE • DANGER • FOCUS
 </div>
 
-<!-- =====================
-RESERVE PANEL
-===================== -->
+<!-- ================= RESERVE PANEL ================= -->
 
 <div class="reserve-overlay" id="reservePanel">
 
@@ -133,14 +117,15 @@ RESERVE PANEL
 
 </div>
 
-<!-- =====================
-SCRIPT
-===================== -->
+<!-- ================= SCRIPT ================= -->
 
 <script>
 
 const topBar = document.querySelector(".top-bar");
 const bottomBar = document.getElementById("bottomBar");
+const heroBg = document.getElementById("heroBg");
+const heroCanvas = document.getElementById("heroCanvas");
+const productSection = document.getElementById("productSection");
 
 /* reserve panel */
 
@@ -181,7 +166,7 @@ async function submitReserve(){
   }
 }
 
-/* cinematic bar behavior */
+/* ===== cinematic bars ===== */
 
 let lastScroll = 0;
 
@@ -198,6 +183,29 @@ window.addEventListener("scroll", () => {
   }
 
   lastScroll = y;
+
+  /* hero parallax */
+
+  const depth = y * 0.06;
+  heroBg.style.transform =
+    `scale(${1 + depth/100}) translateY(${y*0.15}px)`;
+
+  /* CTA fade */
+
+  const heroHeight = heroCanvas.offsetHeight;
+  const fade = 1 - (y / heroHeight)*1.2;
+
+  document.querySelector(".hero-cta").style.opacity =
+    Math.max(fade, 0);
+
+  /* product reveal */
+
+  const rect = productSection.getBoundingClientRect();
+
+  if(rect.top < window.innerHeight * 0.8){
+    productSection.classList.add("reveal");
+  }
+
 });
 
 /* cursor reveal */
